@@ -1,4 +1,3 @@
-sudo: false
 language: node_js
 node_js:
   - 10 # use nodejs v10 LTS
@@ -6,14 +5,14 @@ cache: npm
 branches:
   only:
     - hexo-source # build hexo-source branch only
+  except:
+    - master
 script:
   - hexo generate # generate static files
 deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: $GH_TOKEN
-  keep-history: true
+  provider: pages:git
+  skip_cleanup: true
+  github_token: $GH_TOKEN
+  keep_history: true
+  verbose: true
   target_branch: master # generate static files to master
-on:
-branch: master # source code of hexo
-local-dir: public
